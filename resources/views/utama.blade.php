@@ -14,6 +14,9 @@
       background-color: #f7e9d2; /* desert sand */
       color: #5e3c23;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
     h1 {
       font-weight: bold;
@@ -29,12 +32,13 @@
     }
     .carousel-inner img {
       height: 300px;
+      width: 100%;
       object-fit: cover;
-      border-radius: 12px;
+      border-radius: 0px;
     }
   </style>
 </head>
-<body>
+<body class="p-0 m-0">
 
   <div class="container text-center mt-5">
 
