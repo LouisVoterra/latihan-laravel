@@ -30,7 +30,7 @@
             <tr>
                 <td>{{ $f->id}}</td>
                 <td>{{ $f->name}}</td>
-                <td>{{ $f->category}}</td>
+                <td>{{ $f->category_id}}</td>
                 <td>{{ $f->description}}</td>
                 <td>{{ $f->nutrition_fact}}</td>
                 <td>{{ $f->price}}</td>
