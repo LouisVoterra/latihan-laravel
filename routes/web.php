@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FoodController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,9 +86,9 @@ use Illuminate\Support\Facades\Route;
 
 
 
-Route::get('greeting', function(){
-    return view('coba', ['name' => 'Louis Dewa Voterra']);
-});
+// Route::get('greeting', function(){
+//     return view('coba', ['name' => 'Louis Dewa Voterra']);
+// });
 
 Route::get('admins/member', function() {
     return view ('datamember');
@@ -112,5 +113,9 @@ Route::get('/menu/{method}', function(string $method){
         return view("takeaway");
     }
 });
+
+
+
+Route::resource('listmakanan',FoodController::class);
 
 
