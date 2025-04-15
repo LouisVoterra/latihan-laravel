@@ -26,17 +26,40 @@
       </tr>
     </thead>
     <tbody>
-        @foreach($allfood as $f)
+        @foreach($makanans as $f)
             <tr>
                 <td>{{ $f->id}}</td>
                 <td>{{ $f->name}}</td>
-                <td>{{ $f->category_id}}</td>
+                <td>{{ $f->category->name}}</td>
                 <td>{{ $f->description}}</td>
                 <td>{{ $f->nutrition_fact}}</td>
                 <td>{{ $f->price}}</td>
             </tr>
         @endforeach
     </tbody>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Number of foods</th>
+        <th>list name of foods</th> 
+      </tr>
+    </thead>
+    <tbody>
+    @foreach($kategori as $f)
+          <tr>
+            <td>{{ $f->id}}</td>
+            <td>{{ $f->name}}</td>
+            <td>{{ count($f->foods)}}</td>
+            <td>
+                @foreach($f->foods as $i)
+                  {{ $i->name . ";" }}
+                @endforeach
+            </td>
+          </tr>
+        @endforeach
+      </tbody>
+    
   </table>
 </div>
 
