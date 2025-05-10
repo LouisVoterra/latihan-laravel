@@ -52,72 +52,81 @@ use App\Http\Controllers\CategoryController;
 
 
 
-//praktik 1, praktik routing
+// praktik 1, praktik routing
 
-// Route::get('/welcome', function(){
-//     return "Selamat Datang";
-// });
+Route::get('/welcome', function(){
+    return "Selamat Datang";
+});
 
-// Route::get('/before_order', function(){
-//     return "Pilih DINE IN atau Take Away";
-// });
+Route::get('/before_order', function(){
+    return "Pilih DINE IN atau Take Away";
+});
 
-// Route::get('/menu/{method}', function(string $method){
-//     if($method == 'dinein'){
-//         return "Daftar menu dine in";
-//     }
-//     else if($method == 'takeaway'){
-//         return "Daftar menu take away";
-//     }
-// });
-
-
-// Route::get('/admin/{choose}', function(string $choose){
-//     if($choose == "categories"){
-//         return "Portal Manajemen: Daftar Kategori";
-//     }
-//     else if($choose == "order"){
-//         return "Portal Manajemen: Daftar Order";
-//     }
-//     else if($choose == "members"){
-//         return "Daftar Member";
-//     }
-// });
+Route::get('/menu/{method}', function(string $method){
+    if($method == 'dinein'){
+        return "Daftar menu dine in";
+    }
+    else if($method == 'takeaway'){
+        return "Daftar menu take away";
+    }
+});
 
 
+Route::get('/admin/{choose}', function(string $choose){
+    if($choose == "categories"){
+        return "Portal Manajemen: Daftar Kategori";
+    }
+    else if($choose == "order"){
+        return "Portal Manajemen: Daftar Order";
+    }
+    else if($choose == "members"){
+        return "Daftar Member";
+    }
+});
 
 
-// Route::get('greeting', function(){
-//     return view('coba', ['name' => 'Louis Dewa Voterra']);
-// });
-
-// Route::get('admins/member', function() {
-//     return view ('datamember');
-// })->name('listmember');
 
 
-// //praktik 2 --> praktik Bootstrap + Routing
+Route::get('greeting', function(){
+    return view('coba', ['name' => 'Louis Dewa Voterra']);
+});
 
-// Route::get('/welcome', function(){
-//     return view("utama");
-// });
+Route::get('admins/member', function() {
+    return view ('datamember');
+})->name('listmember');
 
-// Route::get('/before_order', function(){
-//     return view("before_order");
-// });
 
-// Route::get('/menu/{method}', function(string $method){
-//     if($method == "dinein"){
-//         return view("dinein");
-//     }
-//     else if($method == "takeaway"){
-//         return view("takeaway");
-//     }
-// });
+//praktik 2 --> praktik Bootstrap + Routing
+
+Route::get('/welcome', function(){
+    return view("utama");
+});
+
+Route::get('/before_order', function(){
+    return view("before_order");
+});
+
+Route::get('/menu/{method}', function(string $method){
+    if($method == "dinein"){
+        return view("dinein");
+    }
+    else if($method == "takeaway"){
+        return view("takeaway");
+    }
+});
 
 
 
 Route::resource('listmakanan',FoodController::class);
 Route::resource('listkategori',CategoryController::class);
+
+Route::post("category/showInfo",[CategoryController::class,'showInfo'])->name('category.showInfo');
+Route::post("category/showHighestFood",[CategoryController::class,'showHighestFood'])->name('category.showHighestFood');
+
+
+Route::post("/category/showListFoods",
+            [CategoryController::class, 'showListFoods'])
+        ->name("category.showListFoods");
+
 
 

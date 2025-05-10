@@ -74,4 +74,48 @@ class CategoryController extends Controller
     {
         //
     }
+
+    public function showInfo(){
+
+      
+
+       return response()->json(array(
+            'status' => 'oke',
+            'msg' => "<div class='alert alert-info'>
+            Tutorial membuat boostrap stripe ada di https://getbootstrap.com/docs/4.0/content/tables/ .'</div>"
+        ), 200);
+
+    }
+
+    public function showHighestFood(){
+
+        $highestFoodCategory = Category::withCount('foods') //ambil class Category, kemudian menggunakan withCount untuk menghitung jumlah food
+        ->orderByDesc('foods_count') // urutkan berdasarkan foods_count secara descending
+        ->first(); // ambil data pertama yang sudah di urutkan
+
+
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => "<div class='alert alert-danger'>
+            The highest amount of food is  <b>'".$highestFoodCategory->name."</b></div>"
+        ), 200);
+
+
+    }
+
+    public function showListFoods()
+    {
+        $category = Category::find($_POST['idcat']);
+        $name = $category->name;
+        $data = $category->foods;
+        return response()->json(array(
+                'status' => 'oke',
+                'title' => $name.' Food List',
+                'body' => view('category.showListFoods', compact('name', 'data'))->render()
+              ), 200);
+    }
+
+
+   
+
 }
