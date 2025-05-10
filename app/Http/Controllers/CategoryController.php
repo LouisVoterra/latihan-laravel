@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\DB;
 
 
 
+
+
 class CategoryController extends Controller
 {
     /**
@@ -15,7 +17,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+       
+        $kategori = Category::all();
+        
+
+        //method1
+        return view('category.index',compact('kategori'));
        
        
     }

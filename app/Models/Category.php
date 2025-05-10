@@ -16,8 +16,7 @@ class Category extends Model
     protected $primaryKey = "id";
     public $timestamps = true;
 
-
-
+    
 
     public function foods(): HasMany{ //nama function nya foods, ngasi tau kalau category itu one to many ke food
         return $this->hasMany(Food::class,'category_id','id'); //categort one to mant dengan food, parameter ke 2 itu foreign key, dan ke 3 itu primary key nya category, dicocokkan

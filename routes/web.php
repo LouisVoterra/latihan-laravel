@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
+use App\Http\Controllers\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,32 +91,33 @@ use App\Http\Controllers\FoodController;
 //     return view('coba', ['name' => 'Louis Dewa Voterra']);
 // });
 
-Route::get('admins/member', function() {
-    return view ('datamember');
-})->name('listmember');
+// Route::get('admins/member', function() {
+//     return view ('datamember');
+// })->name('listmember');
 
 
-//praktik 2 --> praktik Bootstrap + Routing
+// //praktik 2 --> praktik Bootstrap + Routing
 
-Route::get('/welcome', function(){
-    return view("utama");
-});
+// Route::get('/welcome', function(){
+//     return view("utama");
+// });
 
-Route::get('/before_order', function(){
-    return view("before_order");
-});
+// Route::get('/before_order', function(){
+//     return view("before_order");
+// });
 
-Route::get('/menu/{method}', function(string $method){
-    if($method == "dinein"){
-        return view("dinein");
-    }
-    else if($method == "takeaway"){
-        return view("takeaway");
-    }
-});
+// Route::get('/menu/{method}', function(string $method){
+//     if($method == "dinein"){
+//         return view("dinein");
+//     }
+//     else if($method == "takeaway"){
+//         return view("takeaway");
+//     }
+// });
 
 
 
 Route::resource('listmakanan',FoodController::class);
+Route::resource('listkategori',CategoryController::class);
 
 

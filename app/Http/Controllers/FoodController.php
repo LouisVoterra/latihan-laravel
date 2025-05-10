@@ -18,11 +18,11 @@ class FoodController extends Controller
     {
         //
         $makanans = Food::all();
-        $kategori = Category::with('foods')->get();
+        // $kategori = Category::with('foods')->get();
         
 
         //method1
-        return view('foods.index',compact('makanans','kategori'));
+        return view('foods.index',compact('makanans'));
 
         
 
@@ -56,7 +56,7 @@ class FoodController extends Controller
         //show function berfungsi untuk menampilkan detail object berdasarkan id object, sehingga show automatically required 1 parameter
 
         $current_food = Food::find($food);
-        dd($current_food);
+        return view('foods.show',compact('current_food'));
     }
 
     /**
