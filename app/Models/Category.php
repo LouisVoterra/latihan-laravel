@@ -14,7 +14,7 @@ class Category extends Model
     protected $table = "categories";  //agar laravel tidak bingung nyari table categories
 
     protected $primaryKey = "id";
-    public $timestamps = true;
+    public $timestamps = false;
 
     
 

@@ -46,6 +46,16 @@
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Launch demo modal
 </button>   
+
+  @if(@session('status'))
+            <div class="alert alert-success mt-3">
+                {{ session('status') }}
+            </div>
+  @endif
+
+  <a href=" {{ route('listkategori.create') }}" class="btn btn-primary mt-3">+ New Category</a>
+
+
 <div class="container">
   <h2>Category with Hover Rows</h2>
   <p>The <a  href="#" onclick="showInfo()">.table-hover</a> class enables a hover state on table rows. The Highest amount of food is <a href="#" onclick="showHighestFood()">Click Here!</a></p>
