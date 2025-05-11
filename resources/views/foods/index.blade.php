@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
   <h2>Basic Table</h2>
+  <a href=" {{ route('listmakanan.create') }}" class="btn btn-primary mt-3">+ Add New Foods</a>
   <p>The .table class adds basic styling (light padding and horizontal dividers) to a table:</p>            
   <table class="table w-100">
     <thead>

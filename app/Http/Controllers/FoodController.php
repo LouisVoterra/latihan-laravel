@@ -18,7 +18,7 @@ class FoodController extends Controller
     {
         //
         $makanans = Food::all();
-        // $kategori = Category::with('foods')->get();
+       
         
 
         //method1
@@ -37,7 +37,12 @@ class FoodController extends Controller
      */
     public function create()
     {
-        //
+        
+
+        $kategori = Category::all();
+
+        return view('foods.menu',compact('kategori'));
+
     }
 
     /**
@@ -45,7 +50,14 @@ class FoodController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = new Food();
+        $data->name = $request->get('name');
+        $data->description = $request->get('description');
+        $data->price = $request->get('price');
+        $data->category_id = $request->get('category_id');
+        $data->nutrition_fact = $request->get('nutrition_fact');
+        $data->save();
+        return redirect()->route('listmakanan.index')->with('success', 'Succesfully added data!');
     }
 
     /**
