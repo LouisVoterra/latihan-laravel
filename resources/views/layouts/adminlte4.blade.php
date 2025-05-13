@@ -303,6 +303,11 @@
                 <i class="nav-icon bi bi-palette"></i>
                 <p>Daftar Kategori</p>
             </li>
+            <li class="nav-item">
+              <a href="{{ route('formOrder.index')}}" class="nav-link">
+                <i class="nav-icon bi bi-palette"></i>
+                <p>Menu Makanan</p>
+            </li>
         
               <li class="nav-item menu-open">
                 <a href="#" class="nav-link active">

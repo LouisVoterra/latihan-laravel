@@ -45,6 +45,8 @@ class CategoryController extends Controller
         $data->save();
 
         return redirect()->route('listkategori.index')->with('success', 'Succesfully added data!');
+
+        
     }
 
     /**

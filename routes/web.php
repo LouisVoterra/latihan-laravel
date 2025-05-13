@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FoodController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\TransactionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,6 +120,7 @@ Route::get('/menu/{method}', function(string $method){
 
 Route::resource('listmakanan',FoodController::class);
 Route::resource('listkategori',CategoryController::class);
+Route::resource('formOrder',TransactionController::class);
 
 Route::post("category/showInfo",[CategoryController::class,'showInfo'])->name('category.showInfo');
 Route::post("category/showHighestFood",[CategoryController::class,'showHighestFood'])->name('category.showHighestFood');

@@ -23,6 +23,7 @@ class FoodController extends Controller
 
         //method1
         return view('foods.index',compact('makanans'));
+        
 
         
 

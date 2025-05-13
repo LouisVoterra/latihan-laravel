@@ -18,4 +18,10 @@ class Food extends Model
     public function category(): BelongsTo{ //nama function nya category, ngasi tau kalau food itu punya hubungan sama category
         return $this->belongsTo(Category::class,'category_id');
     }
+
+    public function transaction(){
+        return $this->belongsToMany(Transaction::class,'food_transaction')
+        ->withPivot('quantity','price_at_order')
+        ->withTimestamps();
+    }
 }
