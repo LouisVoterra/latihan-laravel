@@ -33,26 +33,37 @@ class TransactionController extends Controller
      */
     public function store(Request $request)
     {
-                $request->validate([
-                'food_id' => 'required|exists:foods,id',
-                'quantity' => 'required|integer|min:1',
+            $request->validate([
+                'customer_name' => 'required|string|max:255',
+                'food_id' => 'required|array',
+                'food_id.*' => 'exists:foods,id',
+                'quantity' => 'required|array',
+                'quantity.*' => 'integer|min:1',
             ]);
 
-            $food = Food::find($request->food_id);
-            $price = $food->price;
-
-            // Simpan transaksi
             $transaction = new Transaction();
-            $transaction->customer_name = $request->get('customer_name');
-            $transaction->total_price = $price * $request->quantity;
+            $transaction->customer_name = $request->customer_name;
             $transaction->transaction_date = now();
+            $transaction->total_price = 0; // akan diupdate setelah looping
             $transaction->save();
 
-            // Simpan ke pivot table
-            $transaction->foods()->attach($food->id, [
-                'quantity' => $request->quantity,
-                'price_at_order' => $price
-            ]);
+            $totalPrice = 0;
+
+            foreach ($request->food_id as $index => $foodId) {
+                $food = Food::find($foodId);
+                $qty = $request->quantity[$index];
+                $subtotal = $food->price * $qty;
+
+                $transaction->foods()->attach($foodId, [
+                    'quantity' => $qty,
+                    'price_at_order' => $food->price
+                ]);
+
+                $totalPrice += $subtotal;
+            }
+
+            $transaction->total_price = $totalPrice;
+            $transaction->save();
 
             return redirect()->route('formOrder.index')->with('success', 'Pesanan berhasil disimpan!');
     }
