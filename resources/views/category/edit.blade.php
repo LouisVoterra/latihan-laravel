@@ -8,8 +8,9 @@
     <title>Edit Category</title>
 </head>
 <body>
-    <form method="POST" action ="{{ route('listkategori.store') }}">
+    <form method="POST" action ="{{ route('listkategori.update',$listkategori->id) }}">
         @csrf
+        @method('PUT')
         <div class="form-group">
             <label for="name">Name:</label>
             <input type="text" class="form-control" id="name" name="name" value="{{ $listkategori->name }}" required

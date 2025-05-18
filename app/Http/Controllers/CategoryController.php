@@ -68,10 +68,14 @@ class CategoryController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Category $listkategori)
     {
-        //
+        $listkategori->name = $request->name;
+        $listkategori->save();
+
+        return redirect()->route('listkategori.index')->with('success', 'Succesfully updated data!');
     }
+    
 
     /**
      * Remove the specified resource from storage.
