@@ -99,8 +99,14 @@ class FoodController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Food $listmakanan)
     {
-        //
+        try{
+            $listmakanan->delete();
+            return redirect()->route('listmakanan.index')->with('success', 'Succesfully deleted data!');
+       }catch(\PDOException $ex){
+            $message = "Make sure there is no related data before delete it. Please contact Administrator to know more about it.";
+            return redirect()->route('listmakanan.index')->with('status', $msg);
+       }
     }
 }
