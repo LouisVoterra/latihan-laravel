@@ -5,11 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class Category extends Model
 {
     use HasFactory;
+    use SoftDeletes;
+
+    //SoftDelete merupakan library yang berfungsi melakukan penghapusan data tetapi tidak secara utuh, artinya
+     //data tersebut seolah olah tersimpan di recycle bin sehingga memungkinkan terhindar dari foreign key constraint
 
     protected $table = "categories";  //agar laravel tidak bingung nyari table categories
 

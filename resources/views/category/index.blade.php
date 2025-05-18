@@ -43,9 +43,6 @@
 
   </script>
 @endpush
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-  Launch demo modal
-</button>   
 
   @if(@session('status'))
             <div class="alert alert-success mt-3">
@@ -53,10 +50,13 @@
             </div>
   @endif
 
-  <a href=" {{ route('listkategori.create') }}" class="btn btn-primary mt-3">+ New Category</a>
-
-
 <div class="container">
+  <br>
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Launch demo modal
+  </button>   
+  <a href=" {{ route('listkategori.create') }}" class="btn btn-primary ">+ New Category</a>
+  <br>
   <h2>Category with Hover Rows</h2>
   <p>The <a  href="#" onclick="showInfo()">.table-hover</a> class enables a hover state on table rows. The Highest amount of food is <a href="#" onclick="showHighestFood()">Click Here!</a></p>
   <div id="showInfo"></div>
@@ -70,7 +70,7 @@
         <th>Name</th>
         <th>Number of foods</th>
         <th>list name of foods</th> 
-        <th>Action</th>
+        <th colspan='2' style=" text-align: center;">Action</th>
       </tr>
     </thead>
     <tbody>
@@ -115,7 +115,15 @@
               </button>
             </td>
             <td>
-             <a class="btn btn-warning" href="{{ route('listkategori.edit', $f->id) }}">Edit</a>
+             <a class="btn btn-warning" href="{{ route('listkategori.edit', $f->id) }}">Edit</a> 
+            </td>
+            <td>
+              <form action = "{{ route('listkategori.destroy', $f->id) }}" method = "POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Delete" class="btn btn-danger"
+                onclick="return confirm('Are you sure to delete {{ $f->id }} -  {{ $f->name}} ? ')">
+             </form>
             </td>
           </tr>
         @endforeach
