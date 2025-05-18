@@ -14,6 +14,7 @@
         <th>Description</th>
         <th>Nutrition Facts</th>
         <th>Price</th> 
+        <th colspan='2' style='text-align: center;'>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -25,6 +26,17 @@
                 <td>{{ $f->description}}</td>
                 <td>{{ $f->nutrition_fact}}</td>
                 <td>{{ $f->price}}</td>
+                <td>
+             <a class="btn btn-warning" href="{{ route('listmakanan.edit', $f->id) }}">Edit</a> 
+            </td>
+            <td>
+              <form action = "{{ route('listmakanan.destroy', $f->id) }}" method = "POST">
+                @csrf
+                @method('DELETE')
+                <input type="submit" value="Delete" class="btn btn-danger"
+                onclick="return confirm('Are you sure to delete {{ $f->id }} -  {{ $f->name}} ? ')">
+             </form>
+            </td>
             </tr>
         @endforeach
     </tbody>

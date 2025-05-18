@@ -75,17 +75,25 @@ class FoodController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Food $listmakanan)
     {
-        //
+       $kategori = Category::all();
+       return view('foods.edit', compact('listmakanan','kategori'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Food $listmakanan)
     {
-        //
+        $listmakanan->name = $request->name;
+        $listmakanan->description = $request->description;
+        $listmakanan->nutrition_fact = $request->nutrition_fact;
+        $listmakanan->price = $request->price;
+        $listmakanan->category_id = $request->category_id;
+        $listmakanan->save();
+
+        return redirect()->route('listmakanan.index')->with('success', 'Succesfully updated data!');
     }
 
     /**
