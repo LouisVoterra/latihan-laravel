@@ -70,6 +70,7 @@
         <th>Name</th>
         <th>Number of foods</th>
         <th>list name of foods</th> 
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
@@ -112,6 +113,9 @@
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#detailModal" 
                 onclick="showDetail({{ $f->id }})">Details
               </button>
+            </td>
+            <td>
+             <a class="btn btn-warning" href="{{ route('listkategori.edit', $f->id) }}">Edit</a>
             </td>
           </tr>
         @endforeach
