@@ -121,6 +121,7 @@ Route::get('/menu/{method}', function(string $method){
 Route::resource('listmakanan',FoodController::class);
 Route::resource('listkategori',CategoryController::class);
 Route::resource('formOrder',TransactionController::class);
+Route::resource('listtransaksi', TransactionController::class);
 
 Route::post("category/showInfo",[CategoryController::class,'showInfo'])->name('category.showInfo');
 Route::post("category/showHighestFood",[CategoryController::class,'showHighestFood'])->name('category.showHighestFood');

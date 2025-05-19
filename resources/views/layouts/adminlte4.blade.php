@@ -304,9 +304,14 @@
                 <p>Daftar Kategori</p>
             </li>
             <li class="nav-item">
-              <a href="{{ route('formOrder.index')}}" class="nav-link">
+              <a href="{{ route('listtransaksi.index')}}" class="nav-link">
                 <i class="nav-icon bi bi-palette"></i>
-                <p>Menu Makanan</p>
+                <p>List Order</p>
+            </li>
+            <li class="nav-item">
+              <a href="{{ route('formOrder.create')}}" class="nav-link">
+                <i class="nav-icon bi bi-palette"></i>
+                <p>Buat Pesanan</p>
             </li>
         
               <li class="nav-item menu-open">

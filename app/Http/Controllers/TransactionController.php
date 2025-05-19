@@ -14,9 +14,13 @@ class TransactionController extends Controller
      */
     public function index()
     {
+        $listorder = Transaction::all();
         $menu = Food::all();
 
-        return view('transaction.index', compact('menu'));  
+        
+
+        return view('transaction.index', compact('listorder'));  
+       
 
     }
 
@@ -25,7 +29,8 @@ class TransactionController extends Controller
      */
     public function create()
     {
-        //
+        $menu = Food::all();
+         return view('transaction.create', compact('menu'));
     }
 
     /**
@@ -79,9 +84,15 @@ class TransactionController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Transaction $listtransaksi)
     {
-        //
+        
+
+        $menu = Food::all();
+        $selectedFoods = $listtransaksi->foods;
+
+        return view('transaction.edit', compact('listtransaksi','menu','selectedFoods'));
+        
     }
 
     /**
@@ -89,14 +100,20 @@ class TransactionController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Transsaction $listtransaksi)
     {
-        //
+        try{
+            $listtransaksi->delete();
+            return redirect()->route('listtransaksi.index')->with('success', 'Succesfully deleted data!');
+       }catch(\PDOException $ex){
+            $message = "Make sure there is no related data before delete it. Please contact Administrator to know more about it.";
+            return redirect()->route('listtransaksi.index')->with('status', $msg);
+       }
     }
 }
