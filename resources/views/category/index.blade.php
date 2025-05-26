@@ -56,6 +56,8 @@
   Launch demo modal
   </button>   
   <a href=" {{ route('listkategori.create') }}" class="btn btn-primary ">+ New Category</a>
+  <br><br>
+  <button type=button class="btn btn-primary" data-bs-toggle = "modal" data-bs-target = "#btnFormModal"> New Category with modal</button>
   <br>
   <h2>Category with Hover Rows</h2>
   <p>The <a  href="#" onclick="showInfo()">.table-hover</a> class enables a hover state on table rows. The Highest amount of food is <a href="#" onclick="showHighestFood()">Click Here!</a></p>
@@ -101,6 +103,37 @@
                 </div>
               </div>
             </div>
+
+
+
+            <div class = "modal fade" id="btnFormModal" tabindex = "-1" role="basic" aria-hidden="true" >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h4 class="modal-title" >Add New Category</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form method="POST" action=" {{ route('listkategori.store') }} ">
+                        @csrf
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" class="form-control" id="name" name="name" aria-describedby="name"
+                                placeholder="Enter Category Name">
+                            <small id="name" class="form-text text-muted">Please write down Category Name here.</small>
+                        </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" class="btn btn-default" data-bs-dismiss="modal">Close</button>
+                  </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+
+
+
+
             @endpush
 
             </td>
@@ -183,11 +216,4 @@
                 </div>
               </div>
             </div>
-
-
-
-
-
-
-
 @endsection  
