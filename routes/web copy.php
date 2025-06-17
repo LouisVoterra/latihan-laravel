@@ -16,9 +16,9 @@ use App\Http\Controllers\TransactionController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 
 // Route::get('foo', function () { //foo itu URI, jdi bebas aksesnya, berarti klo run di local maka URL nya http://127.0.0.1:8000/foo
@@ -128,10 +128,6 @@ Route::post("category/showHighestFood",[CategoryController::class,'showHighestFo
 
 Route::post('/ajax/category/getEditForm',[CategoryController::class,'getEditForm'])->name('kategori.getEditForm');
 Route::post('/ajax/category/getEditFormB',[CategoryController::class,'getEditFormB'])->name('kategori.getEditFormB');
-Route::post('/ajax/category/saveDataUpdate',[CategoryController::class,'saveDataUpdate'])
-            ->name('kategori.saveDataUpdate');
-
-Route::post('ajax/category/deleteData',[CategoryController::class,'deleteData'])->name('kategori.deleteData');
 
 
 Route::post("/category/showListFoods",
@@ -141,7 +137,3 @@ Route::post("/category/showListFoods",
 
 
 
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

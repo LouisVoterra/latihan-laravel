@@ -30,6 +30,47 @@ class CategoryController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+     public function getEditForm(Request $request)
+     {
+        $id = $request->id;
+        $data =  Category::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('category.getEditForm', compact('data'))->render()),200
+        );  
+     }
+
+     public function getEditFormB(Request $request)
+     {
+        $id = $request->id;
+        $data =  Category::find($id);
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => view('category.getEditFormB', compact('data'))->render()),200
+        );  
+     }
+
+    public function saveDataUpdate(Request $request)
+    {
+        $id = $request->id;
+        $data = Category::find($id);
+        $data->name = $request->name;
+        $data->save();
+        return response()->json(array('status' => 'oke', 'msg' => 'type data is up-to-date !'), 200);
+    }
+
+    public function deleteData(Request $request){
+        $id = $request->id;
+        $data = Category::find($id);
+        $data->delete();
+        return response()->json(array(
+            'status' => 'oke',
+            'msg' => 'Data has been deleted!'
+        ), 200);
+    }
+
+
     public function create()
     {
         return view('category.create');

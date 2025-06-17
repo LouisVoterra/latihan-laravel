@@ -41,6 +41,77 @@
       });
     }
 
+
+
+    function getEditForm(id)
+    {
+      $.ajax({
+      type:'POST',
+      url:'{{route("kategori.getEditForm")}}',
+      data: {
+        '_token' : '<?php echo csrf_token() ?>',
+        'id': id
+      },
+      success: function(data){
+        $('#modalContent').html(data.msg)
+      }
+      });
+    }
+
+
+    function getEditFormB(id){
+      $.ajax({
+        type:'POST',
+        url:'{{route("kategori.getEditFormB")}}',
+        data: {
+          '_token' : '<?php echo csrf_token() ?>',
+          'id': id
+        },
+        success: function(data){
+          $('#modalContentB').html(data.msg)
+        }
+      });
+    }
+
+    function saveDataUpdate(id) {
+      var name = $('#ename').val(); 
+      console.log(name);
+
+      $.ajax({
+        type: 'POST',
+        url: '{{ route("kategori.saveDataUpdate") }}',
+        data: {
+          '_token': '{{ csrf_token() }}',
+          'id': id,
+          'name': name
+        },
+        success: function(data) {
+          if (data.status == 'oke') {
+            $('#td_name_' + id).html(name); // langsung pakai name juga bisa
+            $('#modalEditB').modal('hide');
+            alert('Data updated successfully!');
+          }
+        }
+      });
+    }
+
+    function deleteDataRemove(id){
+      $.ajax({
+        type: 'POST',
+        url: '{{ route("kategori.deleteData") }}',
+        data: {
+          '_token': '<?php echo csrf_token() ?>',
+          'id': id
+        },
+        success: function(data){
+          if(data.status == 'oke'){
+            $('#tr_'+id).remove(); //menghapus baris tr dengan id yang sesuai
+          }
+        }
+      });
+    }
+
+
   </script>
 @endpush
 
@@ -77,7 +148,7 @@
     </thead>
     <tbody>
     @foreach($kategori as $f)
-          <tr>
+          <tr id="tr_{{ $f->id }}">  <!--tambahan  -->
             <td>{{ $f->id}}</td>
             <td>
               <button type="button" class="btn btn-primary" data-bs-toggle="modal"  data-bs-target="#imageModal-{{$f->id}}">Show</button>
@@ -131,13 +202,37 @@
               </div>
             </div>
 
+            <!-- modal ini untuk handle button yg intinya bakal refresh web saat send data -->
+
+            <div class="modal fade" id="modalEditA" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog modal-wide">
+                <div class="modal-content" >
+                    <div class="modal-body" id="modalContent">
+                        {{-- You can put animated loading image here... --}}
+                    </div>
+                </div>
+            </div>
+          </div> 
+
+          <!-- bedanya ini ga ngerefresh web -->
+
+          <div class="modal fade" id="modalEditB" tabindex="-1" role="basic" aria-hidden="true">
+            <div class="modal-dialog modal-wide">
+                <div class="modal-content" >
+                    <div class="modal-body" id="modalContentB">
+                        {{-- You can put animated loading image here... --}}
+                    </div>
+                </div>
+            </div>
+          </div> 
+
 
 
 
             @endpush
 
             </td>
-            <td>{{ $f->name}}</td>
+            <td id="td_name_{{ $f->id }}">{{ $f->name}}</td>
             <td>{{ count($f->foods)}}</td>
             <td>
                 <!-- @foreach($f->foods as $i)
@@ -149,6 +244,10 @@
             </td>
             <td>
              <a class="btn btn-warning" href="{{ route('listkategori.edit', $f->id) }}">Edit</a> 
+             <a href="#modalEditA" class="btn btn-warning" data-bs-toggle="modal" onclick="getEditForm({{$f->id}})">Edit Type A </a> <!-- update data, tpi ngerefresh web -->
+             <a href="#modalEditB" class="btn btn-info" data-bs-toggle="modal" onclick="getEditFormB({{$f->id}})">Edit Type B</a> <!-- update data, tpi gk ngerefresh web -->
+             <a href="#" value="DeleteNoReload" class="btn btn-danger" onclick = "if(confirm('Are you sure to delete {{ $f-> id }} - {{ $f-> name }} ? '))
+             deleteDataRemove({{ $f->id }})">Delete No Reload</a>
             </td>
             <td>
               <form action = "{{ route('listkategori.destroy', $f->id) }}" method = "POST">
